@@ -35,4 +35,10 @@ public class EmailLog {
 
     @Column(nullable = false)
     private OffsetDateTime sentAt;
+
+    @PrePersist
+    void prePersist() {
+        if (sentAt == null) sentAt = OffsetDateTime.now();
+        if (status == null)  status = "OK";
+    }
 }
